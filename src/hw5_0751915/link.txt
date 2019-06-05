@@ -1,0 +1,6 @@
+video URL:
+https://drive.google.com/open?id=1mMzxEYA2uRpv__GWj_nGfkh20Z6zJ7XC
+
+if TA can't open this URL, tell me (0751915) and I will show the video in another way.
+
+P.S. My computer is very old. When I run the icp, it take a lot of time to calculate. So I slow down the speed of the rosbag. If I don;t do it, the result will be very bad when the map rotate.

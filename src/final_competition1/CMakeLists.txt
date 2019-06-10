@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 2.8.3)
 project(final_competition1)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+ add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  tf
   roscpp
   rospy
   roslib
@@ -112,9 +113,9 @@ add_definitions (${GeographicLib_DEFINITIONS})
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES final_competition1
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -125,7 +126,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
- include
+  include
+  src
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
@@ -136,6 +138,7 @@ include_directories(
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/final_competition1.cpp
 # )
+add_library(${PROJECT_NAME} src/gps.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -167,6 +170,9 @@ target_link_libraries (map_node ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 add_executable(ground_truth_node src/ground_truth.cpp)
 target_link_libraries (ground_truth_node ${catkin_LIBRARIES})
+
+add_executable(gps_trans_node src/gps.cpp)
+target_link_libraries (gps_trans_node ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
 
 #############
 ## Install ##

@@ -9,8 +9,8 @@ def main():
 	global counter
 
 	# Ground Truth and Measurement Path
-	file_gt = '/home/ee904-i5-old-pc-1/Desktop/sdc_ws/src/localization_ground_truth/localization_ground_truth_1.csv'
-	file_meas = '/home/ee904-i5-old-pc-1/Desktop/sdc_ws/src/localization_ground_truth/answer_1.csv'
+	file_gt = '/home/andy/catkin_ws/src/final_competition1/localization_ground_truth/localization_ground_truth_1.csv'
+	file_meas = '/home/andy/catkin_ws/src/final_competition1/localization_ground_truth/localization_measurement.csv'
 
 	gt_list = []
 	gt_list = read_csv(file_gt)

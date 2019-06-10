@@ -12,9 +12,15 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   roslib
   std_msgs
+  sensor_msgs
   geometry_msgs
   final_competition1
 )
+
+find_package(Eigen3	REQUIRED)
+find_package(PCL REQUIRED COMPONENTS)
+find_package(GeographicLib REQUIRED)
+add_definitions (${GeographicLib_DEFINITIONS})
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -121,6 +127,9 @@ catkin_package(
 include_directories(
  include
   ${catkin_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${GeographicLib_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -137,7 +146,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/final_competition1_node.cpp)
-add_executable(ground_truth_node src/ground_truth.cpp)
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -153,6 +162,10 @@ add_executable(ground_truth_node src/ground_truth.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+add_executable(map_node src/map.cpp)
+target_link_libraries (map_node ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(ground_truth_node src/ground_truth.cpp)
 target_link_libraries (ground_truth_node ${catkin_LIBRARIES})
 
 #############
